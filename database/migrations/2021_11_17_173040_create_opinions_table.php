@@ -18,7 +18,7 @@ class CreateOpinionsTable extends Migration
             $table->string('description', 5000);
             $table->integer('practice_id')->index('fk_opinion_about_idx');
             $table->integer('user_id')->index('fk_opinions_users1_idx');
-            $table->integer('opinionstate_id');
+            $table->timestamps();
         });
     }
 
