@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Hello</h1>
-    @foreach (\App\Models\Domain::all() as $domain)
-        <p>{{ $domain->name }}</p>
+    @foreach (\App\Models\Role::all() as $role)
+        <p>{{ $role->name }}</p>
     @endforeach
 @endsection
