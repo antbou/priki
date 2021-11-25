@@ -1,5 +1,5 @@
 @extends('layout')
-
+@section('title', 'HomePage')
 @section('content')
     <article class="text-3xl max-w-prose mx-auto py-8">
 
