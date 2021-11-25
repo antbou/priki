@@ -3,13 +3,18 @@
 @section('content')
     <article class="text-3xl max-w-prose mx-auto py-8">
 
-        <h1 class="text-5xl font-bold pb-8">Pratiques :</h1>
-        <label for="day">Nombre de jours :</label>
-        <input class="border-2 border-gray-900 timeSelection" type="number" id="day" name="day" min="0" max="100">
+        <div class="flex justify-around pb-8">
+            <h1 class="flex-auto text-5xl font-bold">Pratiques</h1>
+            <div class="m-auto text-sm">
+                <label for="day">Sorti ces derniers jours ;</label>
+                <input class="border-2 border-light-gray-900 text-center timeSelection" type="number" id="day" name="day"
+                    min="0" max="100">
+            </div>
+        </div>
         @forelse  ($practices as $practice)
             <h2 class="mt-2 pt-8 text-sm text-gray-500">
-                Créé le {{ $practice->created_at->isoformat('D MMMM Y') }}, mise à
-                jours le {{ $practice->updated_at->isoformat('D MMMM Y à HH:mm') }}
+                Créé le {{ $practice->created_at->isoformat('D MMMM Y') }},
+                mis à jours le {{ $practice->updated_at->isoformat('D MMMM Y à HH:mm') }}
             </h2>
             <p class="mt-4 text-lg">{{ $practice->description }} </p>
             <span
