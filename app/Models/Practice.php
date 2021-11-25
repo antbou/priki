@@ -9,6 +9,8 @@ class Practice extends Model
 {
     use HasFactory;
 
+    const DAYS = 5;
+
     public function domain()
     {
         return $this->belongsTo(Domain::class);
