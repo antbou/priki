@@ -6,20 +6,30 @@ use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Practice;
 use App\Models\PublicationState;
+use Illuminate\Database\Eloquent\Collection;
+use PhpParser\Node\Expr\Print_;
 
 class ShowPractice extends Component
 {
 
+    public $model;
     public $days = Practice::DAYS;
 
-    public function updateDays(int $days)
+
+    public function update(int $days = null)
     {
         $this->days = $days;
     }
 
+    private function days()
+    {
+        return Practice::getPublishedPracticesByUpdateDays($this->days);
+    }
+
     public function render()
     {
-        $practices = PublicationState::where('slug', 'PUB')->first()->practices()->where('updated_at', '>=', Carbon::now()->subDays(intval($this->days)))->get();
+        $method = $this->model;
+        $practices =  $this->$method();
         return view('livewire.show-practice', ['practices' => $practices]);
     }
 }
