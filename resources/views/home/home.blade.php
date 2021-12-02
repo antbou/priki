@@ -2,6 +2,6 @@
 @section('title', 'HomePage')
 @section('content')
 
-    @livewire('show-practice')
+    @livewire('show-practice', ['model' => 'days'])
 
 @endsection
