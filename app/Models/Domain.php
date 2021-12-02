@@ -20,4 +20,9 @@ class Domain extends Model
     {
         return $this->hasMany(Practice::class);
     }
+
+    public static function findBySlug(string $slug): Domain
+    {
+        return self::where('slug', $slug)->first();
+    }
 }

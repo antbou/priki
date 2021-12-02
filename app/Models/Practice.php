@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Practice extends Model
 {
@@ -19,5 +20,10 @@ class Practice extends Model
     public function state()
     {
         return $this->belongsTo(PublicationState::class);
+    }
+
+    public static function getPublishedPracticesByUpdateDays($days)
+    {
+        return PublicationState::findBySlug('PUB')->practices()->where('updated_at', '>=', Carbon::now()->subDays(intval($days)))->get();
     }
 }

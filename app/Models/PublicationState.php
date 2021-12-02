@@ -14,4 +14,9 @@ class PublicationState extends Model
     {
         return $this->hasMany(Practice::class);
     }
+
+    public static function findBySlug(string $slug): PublicationState
+    {
+        return self::where('slug', $slug)->first();
+    }
 }
