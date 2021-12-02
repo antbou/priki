@@ -17,4 +17,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'show'])->name('homepage');
-Route::get('/domsain', [DomainController::class, 'show'])->name('domain');
+Route::get('/domain/{slug}', [DomainController::class, 'show'])->name('domain');
+Route::get('/domain/', [DomainController::class, 'showAll'])->name('domains');

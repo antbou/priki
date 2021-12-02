@@ -2,14 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
+use App\Models\Domain;
+use App\Models\Practice;
 
 
 class DomainController extends Controller
 {
-    public function show()
+
+    public function showAll()
     {
-        Carbon::setLocale('fr');
-        return view('domain.home');
+        $practices = Practice::all();
+        return view('domain.domain', ['practices' => $practices]);
+    }
+
+    public function show($slug)
+    {
+        $domain = Domain::findBySlug($slug);
+        $practices = $domain->practices()->get();
+        return view('domain.domain', ['practices' => $practices, 'domain' => $domain, 'hideDomain' => false]);
     }
 }
