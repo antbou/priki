@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\HomeController;
-use App\Http\Livewire\ShowPractice;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'show'])->name('homepage');
 Route::get('/domain/{slug}', [DomainController::class, 'show'])->name('domain');
 Route::get('/domain/', [DomainController::class, 'showAll'])->name('domains');
+
+Route::get('/redirects', function () {
+    return redirect()->route('homepage');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__ . '/auth.php';
