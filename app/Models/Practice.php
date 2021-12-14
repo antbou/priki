@@ -22,8 +22,18 @@ class Practice extends Model
         return $this->belongsTo(PublicationState::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class)->first();
+    }
+
     public static function getPublishedPracticesByUpdateDays($days)
     {
         return PublicationState::findBySlug('PUB')->practices()->where('updated_at', '>=', Carbon::now()->subDays(intval($days)))->get();
+    }
+
+    public static function isPracticeIsPublished($id)
+    {
+        return self::where('id', $id)->where('publication_state_id', PublicationState::findBySlug('PUB')->id);
     }
 }
