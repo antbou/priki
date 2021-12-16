@@ -10,6 +10,7 @@ class PracticeController extends Controller
     {
         $practice =  Practice::isPracticeIsPublished($id)->firstOrFail();
         $user = $practice->user();
-        return view('practice.show', ['practice' => $practice, 'user' => $user]);
+        $opinions = $practice->opinions()->get();
+        return view('practice.show', ['practice' => $practice, 'user' => $user, 'opinions' => $opinions]);
     }
 }
