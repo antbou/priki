@@ -27,6 +27,11 @@ class Practice extends Model
         return $this->belongsTo(User::class)->first();
     }
 
+    public function opinions()
+    {
+        return $this->hasMany(Opinion::class);
+    }
+
     public static function getPublishedPracticesByUpdateDays($days)
     {
         return PublicationState::findBySlug('PUB')->practices()->where('updated_at', '>=', Carbon::now()->subDays(intval($days)))->get();
