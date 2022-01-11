@@ -10,5 +10,10 @@
             @endif
         </div>
     </div>
-    @include('_practice')
+    @forelse ($practices as $practice)
+        @include('_practice', ['link' => true])
+    @empty
+        <h3 class="mt-4 text-blue-600 md:text-red-600">Aucune bonne pratique</h3>
+    @endforelse
+
 </article>
