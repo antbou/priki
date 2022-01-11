@@ -3,7 +3,10 @@
 @section('content')
     <article class="text-3xl max-w-prose mx-auto py-8">
         {{ $user->fullname }}
+
         @include('_practice')
+        <i class="far fa-thumbs-up"></i>
+        <i class="far fa-thumbs-down"></i>
         <div class="font-bold text-xl mb-2 pt-6">Commentaires ({{ count($opinions) }})</div>
         @foreach ($opinions as $opinion)
             <article class="text-3xl rounded overflow-hidden border-solid border-2 my-6 px-6 py-4">
