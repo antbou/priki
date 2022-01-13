@@ -3,6 +3,7 @@
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PracticeController;
+use App\Http\Controllers\ReferenceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,13 @@ Route::get('/', [HomeController::class, 'show'])->name('homepage');
 Route::get('/domain/{slug}', [DomainController::class, 'show'])->name('domain');
 Route::get('/domain/', [DomainController::class, 'showAll'])->name('domains');
 Route::get('/practice/{id}', [PracticeController::class, 'show'])->name('practice');
+
+
+
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/reference', [ReferenceController::class, 'show'])->name('reference');
+});
 
 Route::get('/redirects', function () {
     return redirect()->route('homepage');
