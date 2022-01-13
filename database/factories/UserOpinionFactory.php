@@ -19,7 +19,7 @@ class UserOpinionFactory extends Factory
             'user_id' =>  User::all()->random()->id,
             'opinion_id' => Opinion::all()->random()->id,
             'comment' => $this->faker->text(50),
-            'points' => rand(-10, 10)
+            'points' => rand(-1, 1)
         ];
     }
 }
