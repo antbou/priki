@@ -17,14 +17,18 @@ class OpinionReferenceSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i < 30; $i++) {
+        $max = 30;
+        for ($i = 0; $i < $max; $i++) {
             try {
-                DB::table('opinion_reference')->insert([
-                    'opinion_id' => Opinion::all()->random()->id,
-                    'reference_id' => Reference::all()->random()->id
-                ]);
-            } catch (QueryException $e) {
-                // nothing, just ignore the duplicate
+                DB::table('opinion_reference')->insert(
+                    [
+                        'opinion_id' => Opinion::all()->random()->id,
+                        'reference_id' => Reference::all()->random()->id,
+                    ]
+                );
+            } catch (QueryException) {
+                logger('Increase to 1.');
+                $max++;
             }
         }
     }
