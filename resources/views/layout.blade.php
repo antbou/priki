@@ -10,7 +10,7 @@
 
 </head>
 
-@include('_nav')
+@include('layouts._nav')
 
 <body>
     <div class="container mx-auto">
