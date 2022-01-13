@@ -14,6 +14,11 @@ class Opinion extends Model
         return $this->belongsTo(Practice::class)->first();
     }
 
+    public function comments()
+    {
+        return $this->hasMany(UserOpinion::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class)->first();
