@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreReferenceRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class StoreReferenceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::user();
     }
 
     /**
@@ -24,7 +25,8 @@ class StoreReferenceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'description' => 'required|min:10',
+            'url' => 'required|url',
         ];
     }
 }

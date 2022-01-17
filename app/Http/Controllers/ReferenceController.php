@@ -15,7 +15,7 @@ class ReferenceController extends Controller
      */
     public function index()
     {
-        return view('reference.show');
+        return view('reference.index');
     }
 
     /**
@@ -25,7 +25,7 @@ class ReferenceController extends Controller
      */
     public function create()
     {
-        //
+        return view('reference.create');
     }
 
     /**
@@ -36,7 +36,22 @@ class ReferenceController extends Controller
      */
     public function store(StoreReferenceRequest $request)
     {
-        //
+
+        if (Reference::findByUrl($request->url)->first()) {
+            $request->session()->flash('flash_message', 'L\'url existe déjà !');
+            $request->session()->flash('flash_type', 'text-red-400');
+            return redirect()->route('reference.index');
+        }
+
+        Reference::create([
+            'description' => $request->description,
+            'url' => $request->url,
+        ]);
+
+        $request->session()->flash('flash_message', 'Task was successful!');
+        $request->session()->flash('flash_type', 'text-green-400');
+
+        return redirect()->route('reference.index');
     }
 
     /**
