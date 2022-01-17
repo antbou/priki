@@ -12,7 +12,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-breeze.nav-link :href="route('reference')" :active="request()->routeIs('reference')">
+                    <x-breeze.nav-link :href="route('reference.index')" :active="request()->routeIs('reference.index')">
                         {{ __('Références') }}
                     </x-breeze.nav-link>
 

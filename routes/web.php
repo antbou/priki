@@ -21,7 +21,8 @@ Route::get('/', [HomeController::class, 'show'])->name('homepage');
 Route::get('/domain/{slug}', [DomainController::class, 'show'])->name('domain');
 Route::get('/domain', [DomainController::class, 'showAll'])->name('domains');
 Route::get('/practice/{id}', [PracticeController::class, 'show'])->name('practice');
-Route::get('/reference', [ReferenceController::class, 'show'])->name('reference');
+
+Route::resource('reference', ReferenceController::class);
 
 Route::get('/redirects', function () {
     return redirect()->route('homepage');
