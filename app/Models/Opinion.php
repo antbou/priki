@@ -23,4 +23,9 @@ class Opinion extends Model
     {
         return $this->belongsTo(User::class)->first();
     }
+
+    public function references()
+    {
+        return $this->belongsToMany(Reference::class);
+    }
 }
