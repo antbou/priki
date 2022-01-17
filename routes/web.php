@@ -19,22 +19,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'show'])->name('homepage');
 Route::get('/domain/{slug}', [DomainController::class, 'show'])->name('domain');
-Route::get('/domain/', [DomainController::class, 'showAll'])->name('domains');
+Route::get('/domain', [DomainController::class, 'showAll'])->name('domains');
 Route::get('/practice/{id}', [PracticeController::class, 'show'])->name('practice');
-
-
-
-
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/reference', [ReferenceController::class, 'show'])->name('reference');
-});
+Route::get('/reference', [ReferenceController::class, 'show'])->name('reference');
 
 Route::get('/redirects', function () {
     return redirect()->route('homepage');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';

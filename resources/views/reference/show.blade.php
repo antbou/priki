@@ -1,6 +1,4 @@
-@extends('layout')
-@section('title', 'Références')
-@section('content')
+<x-app-layout>
     <article class="text-3xl max-w-prose mx-auto py-8">
         @foreach (App\Models\Reference::all() as $reference)
             <article class="text-3xl rounded overflow-hidden border-solid border-2 my-6 px-6 py-4">
@@ -11,4 +9,4 @@
             </article>
         @endforeach
     </article>
-@endsection
+</x-app-layout>

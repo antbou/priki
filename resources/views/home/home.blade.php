@@ -1,7 +1,3 @@
-@extends('layout')
-@section('title', 'HomePage')
-@section('content')
-
+<x-app-layout>
     @livewire('show-practice', ['model' => 'days'])
-
-@endsection
+</x-app-layout>

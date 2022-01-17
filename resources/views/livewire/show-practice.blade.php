@@ -11,7 +11,7 @@
         </div>
     </div>
     @forelse ($practices as $practice)
-        @include('practice._practice', ['link' => true])
+        @include('components._practice', ['link' => true])
     @empty
         <h3 class="mt-4 text-blue-600 md:text-red-600">Aucune bonne pratique</h3>
     @endforelse
