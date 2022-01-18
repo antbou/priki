@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reference;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreReferenceRequest;
 use App\Http\Requests\UpdateReferenceRequest;
 
@@ -25,6 +26,11 @@ class ReferenceController extends Controller
      */
     public function create()
     {
+
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
         return view('reference.create');
     }
 

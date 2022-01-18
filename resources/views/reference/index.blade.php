@@ -12,7 +12,7 @@
 
         @endif
         @foreach (App\Models\Reference::all() as $reference)
-            <article class="text-3xl rounded overflow-hidden border-solid border-2 my-6 px-6 py-4">
+            <article class="text-xl rounded overflow-hidden border-solid border-2 my-6 px-6 py-4">
                 {{ $reference->description }}
                 @empty(!$reference->url)
                     <a target="_blank"
