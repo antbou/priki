@@ -15,6 +15,11 @@ class Role extends Model
         return self::findBySlug('MBR');
     }
 
+    public static function RoleModo()
+    {
+        return self::findBySlug('MOD');
+    }
+
     public static function findBySlug(string $slug): Role
     {
         return self::where('slug', $slug)->first();
