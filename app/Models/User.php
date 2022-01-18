@@ -47,4 +47,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Practice::class);
     }
+
+
+    function role()
+    {
+        return $this->belongsTo(Role::class)->first();
+    }
 }
