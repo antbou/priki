@@ -30,16 +30,10 @@
 
                     <div x-show="show" class="group-hover:block  bg-white  w-auto">
                         @forelse($opinion->comments  as $comment)
-                            <div class="container px-5 mx-auto flex flex-wrap">
-                                <div class="flex flex-wrap w-full py-2">
-                                    <div class="flex-grow pl-4">
-                                        <h2
-                                            class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider font-bold">
-                                            {{ $comment->user->fullname }}</h2>
-                                        <p class="leading-relaxed text-sm">{{ $comment->comment }}</p>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('partials._comment', [
+                            'description' => $comment->comment,
+                            'username'=>$comment->user->fullname
+                            ])
                         @empty
                             <h3 class="text-center">Aucune comment à afficher ici</h3>
                         @endforelse
