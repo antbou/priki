@@ -2,7 +2,7 @@
     <article class="text-3xl max-w-prose mx-auto py-8">
         {{ $user->fullname }}
 
-        @include('components._practice')
+        @include('partials._practice')
 
         <div class="font-bold text-xl mb-2 pt-6">Commentaires ({{ count($opinions) }})</div>
         @foreach ($opinions as $opinion)
@@ -20,8 +20,6 @@
                     <i class="far fa-thumbs-up"></i>{{ $opinion->comments->where('points', '=', 1)->count() }}
                     <i class="far fa-thumbs-down"></i>{{ $opinion->comments->where('points', '=', -1)->count() }}
                 </div>
-
-
 
                 <div x-data="{ show: false }">
                     <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'" :class="{ 'active': show }"
@@ -45,7 +43,6 @@
                         @empty
                             <h3 class="text-center">Aucune comment à afficher ici</h3>
                         @endforelse
-
                     </div>
                 </div>
 
@@ -58,7 +55,6 @@
                             @else
                                 <a href="{{ $reference->url }}" target="_blank">{{ $reference->description }}</a>
                             @endif
-
                         </div>
                     @endforeach
                 </div>
