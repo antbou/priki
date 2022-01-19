@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Practice;
-use Illuminate\Support\Facades\DB;
+use App\Models\PublicationState;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
 
 class PracticeController extends Controller
 {
@@ -22,9 +23,30 @@ class PracticeController extends Controller
 
     public function show($id)
     {
-        $practice =  Practice::isPracticeIsPublished($id)->firstOrFail();
+        $showState = false;
+        if (Gate::allows('isModo')) {
+            $practice =  Practice::findOrfail($id);
+            $showState = !$showState;
+        } else {
+            $practice =  Practice::isPracticeIsPublished($id)->firstOrFail();
+        }
+
         $user = $practice->user();
         $opinions = $practice->opinions()->get();
-        return view('practice.show', ['practice' => $practice, 'user' => $user, 'opinions' => $opinions]);
+        return view('practice.show', ['practice' => $practice, 'user' => $user, 'opinions' => $opinions, 'showState' => $showState]);
+    }
+
+    public function publish(Request $request, $id)
+    {
+        $practice =  Practice::findOrfail($id);
+        Gate::authorize('publish', $practice);
+
+        $practice->publication_state_id = PublicationState::findBySlug('PUB')->id;
+        $practice->save();
+
+        $request->session()->flash('flash_message', 'Task was successful!');
+        $request->session()->flash('flash_type', 'text-green-400');
+
+        return redirect()->route('homepage');
     }
 }

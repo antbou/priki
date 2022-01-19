@@ -1,4 +1,11 @@
 <article class="text-3xl max-w-prose mx-auto py-8">
+    @if (Session::has('flash_message'))
+
+        <div class="text-md {{ Session::get('flash_type') }}">
+            <h3>{{ Session::get('flash_message') }}</h3>
+        </div>
+
+    @endif
     <div class="flex justify-around pb-8">
         <h1 class="flex-auto text-5xl font-bold">Pratiques</h1>
         <div class="m-auto text-sm">

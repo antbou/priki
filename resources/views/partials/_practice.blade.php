@@ -9,7 +9,7 @@
         {{ $practice->description }}
     @endif
 
-    @if (App\Models\Practice::isPracticeIsPublished($practice->id)->first() && isset($link))
+    @if ((App\Models\Practice::isPracticeIsPublished($practice->id)->first() && isset($link)) || isset($forceLink))
         <br><a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
             href="{{ route('practice', ['id' => $practice->id]) }}">Plus de détail</a>
     @endif
@@ -20,10 +20,8 @@
         {{ $practice->domain->name }}
     </span>
 @endif
-@if (isset($showState))
-    <span @php
-        // dd($practice->state());
-    @endphp
+@if (isset($showState) && $showState)
+    <span
         class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-pink-100 bg-blue-600 rounded-full">
         {{ $practice->state()->first()->name }}
     </span>

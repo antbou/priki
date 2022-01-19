@@ -28,4 +28,12 @@ class Opinion extends Model
     {
         return $this->belongsToMany(Reference::class);
     }
+
+    public static function opinionByPracticeAndUser(Practice $practice, User $user)
+    {
+        return self::where([
+            ['practice_id', '=', $practice->id],
+            ['user_id', '=', $user->id]
+        ]);
+    }
 }
