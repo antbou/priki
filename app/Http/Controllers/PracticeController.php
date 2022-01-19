@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Practice;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class PracticeController extends Controller
@@ -14,7 +15,7 @@ class PracticeController extends Controller
             return redirect()->route('homepage');
         }
 
-        $domains = Practice::all()->groupBy('domain_id')->sortByDesc('publication_state_id');
+        $domains = Practice::all()->sortBy('publication_state_id')->groupBy('domain_id');
 
         return view('practice.index', ['domains' => $domains]);
     }

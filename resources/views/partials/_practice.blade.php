@@ -5,7 +5,6 @@
 <p class="mt-4 text-lg">
     @if (isset($truncate))
         {{ \Illuminate\Support\Str::words($practice->description, 100, $end = ' ...') }}
-
     @else
         {{ $practice->description }}
     @endif
@@ -19,5 +18,13 @@
     <span
         class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-pink-100 bg-pink-600 rounded-full">
         {{ $practice->domain->name }}
+    </span>
+@endif
+@if (isset($showState))
+    <span @php
+        // dd($practice->state());
+    @endphp
+        class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-pink-100 bg-blue-600 rounded-full">
+        {{ $practice->state()->first()->name }}
     </span>
 @endif

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use App\Models\PublicationState;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -19,7 +20,7 @@ class Practice extends Model
 
     public function state()
     {
-        return $this->belongsTo(PublicationState::class);
+        return $this->belongsTo(PublicationState::class, 'publication_state_id');
     }
 
     public function user()

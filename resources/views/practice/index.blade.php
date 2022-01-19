@@ -8,8 +8,9 @@
             </h3>
 
             @forelse ($domain as $practice)
-
-                @include('partials._practice', ['link' => true])
+                @include('partials._practice', [
+                'link' => true, 'truncate' => true, 'showState' => true, 'hideDomain' => true
+                ])
             @empty
                 <h3 class="mt-4 text-blue-600 md:text-red-600">Aucune bonne pratique</h3>
             @endforelse
