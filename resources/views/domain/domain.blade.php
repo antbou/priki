@@ -6,7 +6,7 @@
             </h1>
         </div>
         @forelse ($practices as $practice)
-            @include('partials._practice', ['link' => true])
+            @include('partials._practice', ['link' => true, 'truncate' => true])
         @empty
             <h3 class="mt-4 text-blue-600 md:text-red-600">Aucune bonne pratique</h3>
         @endforelse

@@ -2,7 +2,7 @@
     <article class="text-3xl max-w-prose mx-auto py-8">
         {{ $user->fullname }}
 
-        @include('partials._practice')
+        @include('partials._practice', ['hideLink' => true])
 
         @if (Auth::check() && Auth::user()->can('publish', $practice))
             <div class="font-bold text-xl mb-2 pt-6">

@@ -9,7 +9,7 @@
         {{ $practice->description }}
     @endif
 
-    @if ((App\Models\Practice::isPracticeIsPublished($practice->id)->first() && isset($link)) || isset($forceLink))
+    @if (!isset($hideLink))
         <br><a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
             href="{{ route('practice', ['id' => $practice->id]) }}">Plus de détail</a>
     @endif
