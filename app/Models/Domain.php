@@ -21,8 +21,13 @@ class Domain extends Model
         return $this->hasMany(Practice::class);
     }
 
+    public function getPublishedPractices()
+    {
+        return $this->hasMany(Practice::class)->where('publication_state_id', PublicationState::findBySlug('PUB')->id);
+    }
+
     public static function findBySlug(string $slug): Domain
     {
-        return self::where('slug', $slug)->first();
+        return self::where('slug', $slug)->firstOrFail();
     }
 }

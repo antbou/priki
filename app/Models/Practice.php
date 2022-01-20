@@ -42,4 +42,9 @@ class Practice extends Model
     {
         return self::where('id', $id)->where('publication_state_id', PublicationState::findBySlug('PUB')->id);
     }
+
+    public static function getAllPublishedPractices()
+    {
+        return self::all()->where('publication_state_id', PublicationState::findBySlug('PUB')->id);
+    }
 }

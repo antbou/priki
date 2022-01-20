@@ -23,12 +23,12 @@
                     @endcan
                     <x-breeze.nav-link-parent :href="'#'" :active="request()->routeIs('domain')">
                         <x-slot name="name"><a href="{{ route('domains') }}">Tous
-                                ({{ count(App\Models\Domain::all()) }})</a> </x-slot>
+                                ({{ count(App\Models\Practice::getAllPublishedPractices()) }})</a> </x-slot>
                         <x-slot name="children">
                             @foreach (App\Models\Domain::all() as $domain)
                                 <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent  dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                                     href="{{ route('domain', ['slug' => $domain->slug]) }}">{{ $domain->name }}
-                                    ({{ count($domain->practices()->get()) }})</a>
+                                    ({{ count($domain->getPublishedPractices()->get()) }})</a>
                             @endforeach
                         </x-slot>
                     </x-breeze.nav-link-parent>
