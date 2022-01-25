@@ -2,14 +2,13 @@
     <article class="text-3xl max-w-prose mx-auto py-8">
 
         @if (Session::has('flash_message'))
-            <div class="text-md {{ Session::get('flash_type') }}">
-                <h3>{{ Session::get('flash_message') }}</h3>
-            </div>
+            <x-alert type="{{ Session::get('flash_type') }}" :message="Session::get('flash_message')"
+                class="mb-4" />
         @endif
 
         {{ $user->fullname }}
 
-        @include('partials._practice', ['hideLink' => true])
+        @include('practice._practice', ['hideLink' => true])
 
         @if (Auth::check() && Auth::user()->can('publish', $practice))
             <div class="font-bold text-xl mb-2 pt-6">

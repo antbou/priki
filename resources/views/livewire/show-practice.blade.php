@@ -1,10 +1,7 @@
 <article class="text-3xl max-w-prose mx-auto py-8">
     @if (Session::has('flash_message'))
-
-        <div class="text-md {{ Session::get('flash_type') }}">
-            <h3>{{ Session::get('flash_message') }}</h3>
-        </div>
-
+        <x-alert type="{{ Session::get('flash_type') }}" :message="Session::get('flash_message')"
+            class="mb-4" />
     @endif
     <div class="flex justify-around pb-8">
         <h1 class="flex-auto text-5xl font-bold">Pratiques</h1>
@@ -18,7 +15,7 @@
         </div>
     </div>
     @forelse ($practices as $practice)
-        @include('partials._practice', ['truncate' => true])
+        @include('practice._practice', ['truncate' => true])
     @empty
         <h3 class="mt-4 text-blue-600 md:text-red-600">Aucune bonne pratique</h3>
     @endforelse

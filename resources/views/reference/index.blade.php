@@ -4,12 +4,10 @@
             href="{{ route('reference.create') }}">
             Ajouter une référence
         </a>
+
         @if (Session::has('flash_message'))
-
-            <div class="text-md {{ Session::get('flash_type') }}">
-                <h3>{{ Session::get('flash_message') }}</h3>
-            </div>
-
+            <x-alert type="{{ Session::get('flash_type') }}" :message="Session::get('flash_message')"
+                class="mb-4" />
         @endif
         @foreach (App\Models\Reference::all() as $reference)
             <article class="text-xl rounded overflow-hidden border-solid border-2 my-6 px-6 py-4">
