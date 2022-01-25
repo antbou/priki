@@ -8,7 +8,7 @@
             </h3>
 
             @forelse ($domain as $practice)
-                @include('partials._practice', [
+                @include('practice._practice', [
                 'truncate' => true, 'showState' => true, 'hideDomain' => true
                 ])
             @empty
