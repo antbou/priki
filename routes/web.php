@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OpinionController;
 use App\Http\Controllers\PracticeController;
 use App\Http\Controllers\ReferenceController;
 use Illuminate\Support\Facades\Route;
@@ -22,8 +23,13 @@ Route::get('/domain/{slug}', [DomainController::class, 'show'])->name('domain');
 Route::get('/domain', [DomainController::class, 'showAll'])->name('domains');
 Route::get('/practice/{id}', [PracticeController::class, 'show'])->name('practice');
 Route::get('/practice', [PracticeController::class, 'index'])->name('practice.index');
-Route::get('/publish/{id}', [PracticeController::class, 'publish'])->name('practice.publish');
 Route::resource('reference', ReferenceController::class);
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/publish/{id}', [PracticeController::class, 'publish'])->name('practice.publish');
+    Route::post('/add-opinion-response/{id}', [OpinionController::class, 'storeUserOpinion'])->name('opinion.storeUserOpinion');
+});
+
 
 Route::get('/redirects', function () {
     return redirect()->route('homepage');

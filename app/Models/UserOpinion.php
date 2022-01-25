@@ -13,6 +13,13 @@ class UserOpinion extends Model
     protected $guarded = [];
     protected $table = 'user_opinion';
 
+    protected $fillable = [
+        'user_id',
+        'opinion_id',
+        'comment',
+        'points',
+    ];
+
     public function opinion()
     {
         return $this->belongsTo(Opinion::class);
