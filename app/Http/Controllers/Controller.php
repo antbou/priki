@@ -16,4 +16,10 @@ class Controller extends BaseController
     {
         Carbon::setLocale('fr');
     }
+
+    public function flashBag($request, string $message, ?string $type = null)
+    {
+        $request->session()->flash('flash_message', $message);
+        $request->session()->flash('flash_type', $type);
+    }
 }

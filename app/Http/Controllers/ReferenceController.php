@@ -44,18 +44,19 @@ class ReferenceController extends Controller
     {
 
         if (Reference::findByUrl($request->url)->first()) {
-            $request->session()->flash('flash_message', 'L\'url existe déjà !');
-            $request->session()->flash('flash_type', 'text-red-400');
+            $this->flashBag($request, 'L\'url existe déjà !', 'danger');
             return redirect()->route('reference.index');
         }
 
-        Reference::create([
+        $reference = Reference::create([
             'description' => $request->description,
             'url' => $request->url,
         ]);
 
-        $request->session()->flash('flash_message', 'Task was successful!');
-        $request->session()->flash('flash_type', 'text-green-400');
+        if (!$reference)
+            $this->flashBag($request, 'Une erreur est survenue', 'danger');
+
+        $this->flashBag($request, 'Référence postée !');
 
         return redirect()->route('reference.index');
     }

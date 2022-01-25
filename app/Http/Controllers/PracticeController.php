@@ -42,10 +42,11 @@ class PracticeController extends Controller
         Gate::authorize('publish', $practice);
 
         $practice->publication_state_id = PublicationState::findBySlug('PUB')->id;
-        $practice->save();
 
-        $request->session()->flash('flash_message', 'Task was successful!');
-        $request->session()->flash('flash_type', 'text-green-400');
+        if (!$practice->save())
+            $this->flashBag($request, 'Une erreur est survenue', 'danger');
+
+        $this->flashBag($request, 'Status mis à jours !');
 
         return redirect()->route('homepage');
     }

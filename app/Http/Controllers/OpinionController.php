@@ -20,13 +20,10 @@ class OpinionController extends Controller
 
         $userOpinion = UserOpinion::create($data);
 
-        if (!$userOpinion) {
-            $request->session()->flash('flash_message', 'Une erreur est survenue');
-            $request->session()->flash('flash_type', 'text-red-400');
-        }
+        if (!$userOpinion)
+            $this->flashBag($request, 'Une erreur est survenue', 'danger');
 
-        $request->session()->flash('flash_message', 'Task was successful!');
-        $request->session()->flash('flash_type', 'text-green-400');
+        $this->flashBag($request, 'Commentaire posté !');
 
         return redirect()->route('practice', $opinion->practice());
     }
