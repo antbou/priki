@@ -28,7 +28,41 @@
         @endif
         <div class="font-bold text-xl mb-2 pt-6">Commentaires ({{ count($opinions) }})</div>
         @foreach ($opinions as $opinion)
-            @include('opinion._opinion')
+            <x-opinion :opinion="$opinion">
+                {{-- Accordéon --}}
+                <x-drop>
+                    {{-- text activating the dropdown --}}
+                    <x-slot name="label">
+                        <i class="fas fa-arrow-circle-down"></i>
+                        Afficher les réponses ({{ count($opinion->comments) }})
+                    </x-slot>
+                    {{-- value in the dropdown --}}
+                    <x-slot name="slot">
+                        {{-- form --}}
+                        <x-user-opinion-form :opinion="$opinion"></x-user-opinion-form>
+                        {{-- comments --}}
+                        @forelse($opinion->comments as $comment)
+                            <x-comment :description="$comment->comment" :username="$comment->user->fullname">
+                            </x-comment>
+                        @empty
+                            <h3 class="text-center">Aucun commentaire à afficher ici</h3>
+                        @endforelse
+                    </x-slot>
+                </x-drop>
+                {{-- reference section --}}
+                <div class="flex flex-col ">
+                    @foreach ($opinion->references()->get() as $reference)
+                        <div class="text-sm mt-2">
+                            <i class="fas fa-external-link-alt"></i>&nbsp;
+                            @if (empty($reference->url))
+                                {{ $reference->description }}
+                            @else
+                                <a href="{{ $reference->url }}" target="_blank">{{ $reference->description }}</a>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            </x-opinion>
         @endforeach
     </article>
 </x-app-layout>

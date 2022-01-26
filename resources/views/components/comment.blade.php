@@ -1,3 +1,5 @@
+@props(['username', 'description'])
+
 <div class="container px-5 mx-auto flex flex-wrap">
     <div class="flex flex-wrap w-full py-2 border-2 rounded-lg mt-3">
         <div class="flex-grow pl-4">
