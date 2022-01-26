@@ -7,23 +7,58 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# TeamBuilder
+Realize for PRW2
+## Requirements
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+| Tools                                         | Version |
+|-----------------------------------------------|---------|
+| [Composer](https://getcomposer.org/download/) | 2.2.4   |
+| [Php](https://www.php.net/downloads.php)      | 8.0.9   |
+| [Mysql](https://hub.docker.com/_/mysql)       | 8.0     |
+| [Npm](https://www.npmjs.com/)                 | 8.1.2   |
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Installation
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Clone the repo
+   ```sh
+   git clone https://github.com/antbou/priki.git
+   ```
 
-## Learning Laravel
+2. Install php packages
+   ```sh
+   cd priki
+   composer install
+   ```
 
-```sh
-php artisan serve
-php artisan migrate:fresh --seed
-```
+3. Generate application key and add it in `.env``
+   ```sh
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+3. Install npm dependencies
+    ```sh
+    npm install
+    ```
+
+4. Build assets
+    ```sh
+    npm run dev
+    npm run watch
+    ```
+
+5. Setup database connection
+   ```dotenv
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=<DATABASE_NAME>
+    DB_USERNAME=<USERNAME>
+    DB_PASSWORD=<PASSWORD>
+   ```
+
+6. Populate the database
+   ```sh
+   php artisan migrate:fresh --seed
+   ```
