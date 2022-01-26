@@ -1,5 +1,3 @@
-@props(['type' => 'success'])
-
 @php
 switch ($type) {
     case 'success':
