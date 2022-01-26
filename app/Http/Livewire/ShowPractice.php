@@ -11,25 +11,16 @@ use PhpParser\Node\Expr\Print_;
 
 class ShowPractice extends Component
 {
-
-    public $model;
     public $days = Practice::DAYS;
-
 
     public function update(int $days = null)
     {
         $this->days = $days;
     }
 
-    private function days()
-    {
-        return Practice::getPublishedPracticesByUpdateDays($this->days);
-    }
-
     public function render()
     {
-        $method = $this->model;
-        $practices =  $this->$method();
+        $practices =  Practice::publishedPracticesByUpdateDays($this->days);
         return view('livewire.show-practice', ['practices' => $practices]);
     }
 }
