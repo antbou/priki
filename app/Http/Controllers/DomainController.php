@@ -18,6 +18,6 @@ class DomainController extends Controller
     {
         $domain = Domain::findBySlug($slug);
         $practices = $domain->getPublishedPractices()->get();
-        return view('domain.domain', ['practices' => $practices, 'domain' => $domain, 'hideDomain' => false]);
+        return view('domain.domain', ['practices' => $practices, 'domain' => $domain]);
     }
 }

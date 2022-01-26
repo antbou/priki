@@ -6,9 +6,11 @@
             </h3>
 
             @forelse ($domain->practices as $practice)
-                @include('practice._practice', [
-                'truncate' => true, 'showState' => true, 'hideDomain' => true
-                ])
+                <x-practice :practice="$practice" truncate="true" link="true">
+                    <x-slot name="tags">
+                        <x-tag type="man">{{ __($practice->state()->first()->name) }}</x-tag>
+                    </x-slot>
+                </x-practice>
             @empty
                 <h3 class="mt-4 text-blue-600 md:text-red-600">Aucune bonne pratique</h3>
             @endforelse

@@ -6,7 +6,13 @@
             </h1>
         </div>
         @forelse ($practices as $practice)
-            @include('practice._practice', ['link' => true, 'truncate' => true])
+            <x-practice :practice="$practice" truncate="true" link="true">
+                @if (Route::is('domains'))
+                    <x-slot name="tags">
+                        <x-tag type="lady">{{ __($practice->domain->name) }}</x-tag>
+                    </x-slot>
+                @endif
+            </x-practice>
         @empty
             <h3 class="mt-4 text-blue-600 md:text-red-600">Aucune bonne pratique</h3>
         @endforelse

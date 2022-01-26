@@ -8,7 +8,14 @@
 
         {{ $user->fullname }}
 
-        @include('practice._practice', ['hideLink' => true])
+        <x-practice :practice="$practice">
+            <x-slot name="tags">
+                <x-tag type="lady">{{ __($practice->domain->name) }}</x-tag>
+                @if (Gate::allows('isModo'))
+                    <x-tag type="man">{{ __($practice->state()->first()->name) }}</x-tag>
+                @endif
+            </x-slot>
+        </x-practice>
 
         @if (Auth::check() && Auth::user()->can('publish', $practice))
             <div class="font-bold text-xl mb-2 pt-6">
@@ -18,9 +25,7 @@
                     Publié
                 </a>
             </div>
-
         @endif
-
         <div class="font-bold text-xl mb-2 pt-6">Commentaires ({{ count($opinions) }})</div>
         @foreach ($opinions as $opinion)
             @include('opinion._opinion')
