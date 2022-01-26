@@ -29,23 +29,19 @@ class PracticeController extends Controller
             $practice =  Practice::findOrfail($id);
             $showState = !$showState;
         } else {
-            $practice =  Practice::isPracticeIsPublished($id)->firstOrFail();
+            $practice =  Practice::isPublished($id)->firstOrFail();
         }
 
-        $user = $practice->user();
-        $opinions = $practice->opinions()->get();
-        return view('practice.show', ['practice' => $practice, 'user' => $user, 'opinions' => $opinions, 'showState' => $showState]);
+        return view('practice.show', ['practice' => $practice, 'user' => $practice->user(), 'opinions' => $practice->opinions()->get(), 'showState' => $showState]);
     }
 
     public function publish(Request $request, $id)
     {
         $practice =  Practice::findOrfail($id);
+
         Gate::authorize('publish', $practice);
 
-        $practice->publication_state_id = PublicationState::findBySlug('PUB')->id;
-
-        if (!$practice->save())
-            $this->flashBag($request, 'Une erreur est survenue', 'danger');
+        if (!$practice->publish()) $this->flashBag($request, 'Une erreur est survenue', 'danger');
 
         $this->flashBag($request, 'Status mis à jours !');
 

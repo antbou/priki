@@ -11,8 +11,7 @@ class DomainController extends Controller
 
     public function showAll()
     {
-        $practices = Practice::getAllPublishedPractices();
-        return view('domain.domain', ['practices' => $practices]);
+        return view('domain.domain', ['practices' => Practice::publishedPractices()]);
     }
 
     public function show($slug)

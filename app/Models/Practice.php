@@ -33,18 +33,28 @@ class Practice extends Model
         return $this->hasMany(Opinion::class);
     }
 
-    public static function getPublishedPracticesByUpdateDays($days)
+    public static function publishedPracticesByUpdateDays($days)
     {
-        return PublicationState::findBySlug('PUB')->practices()->where('updated_at', '>=', Carbon::now()->subDays(intval($days)))->get();
+        $date = Carbon::now('UTC')->startOfDay();
+        $date->subDays(intval($days));
+
+        return PublicationState::findBySlug('PUB')->practices()->where('updated_at', '>=', $date)->get();
     }
 
-    public static function isPracticeIsPublished($id)
+    public static function isPublished($id)
     {
         return self::where('id', $id)->where('publication_state_id', PublicationState::findBySlug('PUB')->id);
     }
 
-    public static function getAllPublishedPractices()
+    public static function publishedPractices()
     {
         return self::all()->where('publication_state_id', PublicationState::findBySlug('PUB')->id);
+    }
+
+    public function publish(): bool
+    {
+        $this->publication_state_id = PublicationState::findBySlug('PUB')->id;
+
+        return $this->save();
     }
 }
