@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Domain;
 use App\Models\Practice;
+use Illuminate\Http\Request;
 use App\Models\PublicationState;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
 
 class PracticeController extends Controller
 {
@@ -16,7 +17,7 @@ class PracticeController extends Controller
             return redirect()->route('homepage');
         }
 
-        $domains = Practice::all()->sortBy('publication_state_id')->groupBy('domain_id');
+        $domains = Domain::listOfPractices()->get();
 
         return view('practice.index', ['domains' => $domains]);
     }

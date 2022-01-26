@@ -30,4 +30,11 @@ class Domain extends Model
     {
         return self::where('slug', $slug)->firstOrFail();
     }
+
+    public function scopeListOfPractices($query)
+    {
+        return $query->orderBy('id')->with(['practices' => function ($query) {
+            $query->orderBy('publication_state_id');
+        }]);
+    }
 }
