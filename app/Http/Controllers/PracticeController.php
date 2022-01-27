@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdatePracticeRequest;
 use App\Models\Domain;
 use App\Models\Practice;
 use Illuminate\Http\Request;
@@ -30,6 +31,20 @@ class PracticeController extends Controller
         }
 
         return view('practice.show', ['practice' => $practice, 'user' => $practice->user(), 'opinions' => $practice->opinions()->get()]);
+    }
+
+    public function update(UpdatePracticeRequest $request, $id)
+    {
+        $practice =  Practice::findOrfail($id);
+
+        $practice->title = $request->title;
+        $practice->reason = $request->reason;
+
+        if (!$practice->save()) $this->flashBag($request, 'Une erreur est survenue', 'danger');
+
+        $this->flashBag($request, 'Titre mis à jours !');
+
+        return redirect()->route('practice', $id);
     }
 
     public function publish(Request $request, $id)

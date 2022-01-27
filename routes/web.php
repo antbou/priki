@@ -28,6 +28,7 @@ Route::resource('reference', ReferenceController::class);
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/publish/{id}', [PracticeController::class, 'publish'])->name('practice.publish');
     Route::post('/add-opinion-response/{id}', [OpinionController::class, 'storeUserOpinion'])->name('opinion.storeUserOpinion');
+    Route::post('/practice/{id}/edit', [PracticeController::class, 'update'])->name('practice.update');
 });
 
 
