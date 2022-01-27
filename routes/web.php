@@ -26,7 +26,7 @@ Route::get('/practice', [PracticeController::class, 'index'])->name('practice.in
 Route::resource('reference', ReferenceController::class);
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/publish/{id}', [PracticeController::class, 'publish'])->name('practice.publish');
+    Route::post('/publish/{id}', [PracticeController::class, 'publish'])->name('practice.publish');
     Route::post('/add-opinion-response/{id}', [OpinionController::class, 'storeUserOpinion'])->name('opinion.storeUserOpinion');
 });
 

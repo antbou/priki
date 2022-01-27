@@ -19,11 +19,14 @@
 
         @if (Auth::check() && Auth::user()->can('publish', $practice))
             <div class="font-bold text-xl mb-2 pt-6">
-                <a href="{{ route('practice.publish', [$practice]) }}"
-                    class="text-green-500 bg-transparent border border-solid border-green-500 hover:bg-green-500 hover:text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button">
-                    Publié
-                </a>
+                <form action="{{ route('practice.publish', $practice) }}" method="post">
+                    @csrf
+                    <input type="hidden" value="{{ $practice->id }}" name="practice">
+                    <div class="row">
+                        <button type="submit"
+                            class="text-green-500 bg-transparent border border-solid border-green-500 hover:bg-green-500 hover:text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Publié</button>
+                    </div>
+                </form>
             </div>
         @endif
         <div class="font-bold text-xl mb-2 pt-6">Commentaires ({{ count($opinions) }})</div>
