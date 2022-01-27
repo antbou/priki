@@ -33,6 +33,12 @@ class Practice extends Model
         return $this->hasMany(Opinion::class);
     }
 
+    public function changelogs()
+    {
+        return $this->hasMany(Changelog::class);
+    }
+
+
     public static function publishedPracticesByUpdateDays($days)
     {
         $date = Carbon::now('UTC')->startOfDay();
