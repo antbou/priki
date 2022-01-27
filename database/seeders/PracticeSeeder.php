@@ -75,7 +75,6 @@ class PracticeSeeder extends Seeder
                 'user_id' => User::all()->random()->id,
                 'updated_at' => Carbon::now()->subMinutes(rand(1, 5 * 24 * 60)),
                 'title' => $titles[$key],
-                'reason' => 'default title'
             ]);
         }
 

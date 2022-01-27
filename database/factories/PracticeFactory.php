@@ -25,7 +25,6 @@ class PracticeFactory extends Factory
             'publication_state_id' => PublicationState::all()->random()->id,
             'user_id' => User::all()->random()->id,
             'title' => Str::limit(Str::words($description, rand(3, 5), ''), 40, ''),
-            'reason' => 'default title'
         ];
     }
 }
