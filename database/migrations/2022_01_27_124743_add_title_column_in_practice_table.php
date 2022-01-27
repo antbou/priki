@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTitleAndReasonColumnsInPracticeTable extends Migration
+class AddTitleColumnInPracticeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,6 @@ class AddTitleAndReasonColumnsInPracticeTable extends Migration
     {
         Schema::table('practices', function (Blueprint $table) {
             $table->string('title', 40)->unique();
-            $table->string('reason')->nullable();
         });
     }
 
