@@ -10,19 +10,20 @@
 
         <x-practice :practice="$practice">
             <x-slot name="headers">
-                <x-drop>
-                    {{-- text activating the dropdown --}}
-                    <x-slot name="label">
-                        <i class="fas fa-edit"></i>
-                        Modifier le titre
-                    </x-slot>
-                    {{-- value in the dropdown --}}
-                    <x-slot name="slot">
-                        {{-- form --}}
-                        <x-practice-title-form :practice="$practice"></x-practice-title-form>
-                    </x-slot>
-                </x-drop>
-
+                @can('update', $practice)
+                    <x-drop>
+                        {{-- text activating the dropdown --}}
+                        <x-slot name="label">
+                            <i class="fas fa-edit"></i>
+                            Modifier le titre
+                        </x-slot>
+                        {{-- value in the dropdown --}}
+                        <x-slot name="slot">
+                            {{-- form --}}
+                            <x-practice-title-form :practice="$practice"></x-practice-title-form>
+                        </x-slot>
+                    </x-drop>
+                @endcan
             </x-slot>
             <x-slot name="tags">
                 <x-tag type="lady">{{ __($practice->domain->name) }}</x-tag>

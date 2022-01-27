@@ -35,7 +35,12 @@ class PracticeController extends Controller
 
     public function update(UpdatePracticeRequest $request, $id)
     {
+
+
+
         $practice =  Practice::findOrfail($id);
+
+        Gate::authorize('update', $practice);
 
         $practice->title = $request->title;
         $practice->reason = $request->reason;

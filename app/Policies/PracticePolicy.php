@@ -25,4 +25,9 @@ class PracticePolicy
     {
         return Gate::allows('isModo', $user) && $practice->state == PublicationState::findBySlug('PRO') &&  Opinion::opinionByPracticeAndUser($practice, $user)->first() instanceof Opinion;
     }
+
+    public function update(User $user, Practice $practice)
+    {
+        return Gate::allows('isModo', $user) || $practice->user_id == $user->id;
+    }
 }
