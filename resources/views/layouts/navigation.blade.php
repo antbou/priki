@@ -8,6 +8,7 @@
                     <a href="{{ route('homepage') }}">
                         <x-breeze.application-logo class="block h-10 w-auto fill-current text-gray-600" />
                     </a>
+                    <h2>Anthony Bouillant</h2>
                 </div>
 
                 <!-- Navigation Links -->
