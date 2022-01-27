@@ -15,7 +15,7 @@ class AddTitleAndReasonColumnsInPracticeTable extends Migration
     {
         Schema::table('practices', function (Blueprint $table) {
             $table->string('title', 40)->unique();
-            $table->string('reason');
+            $table->string('reason')->nullable();
         });
     }
 
