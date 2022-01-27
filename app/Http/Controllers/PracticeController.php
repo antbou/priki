@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdatePracticeRequest;
 use App\Models\Domain;
 use App\Models\Practice;
+use App\Models\Changelog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\UpdatePracticeRequest;
 
 class PracticeController extends Controller
 {
@@ -35,19 +37,23 @@ class PracticeController extends Controller
 
     public function update(UpdatePracticeRequest $request, $id)
     {
-
-
-
         $practice =  Practice::findOrfail($id);
 
         Gate::authorize('update', $practice);
 
-        $practice->title = $request->title;
-        $practice->reason = $request->reason;
+        if ($practice->title != $request->title) {
+            Changelog::create([
+                'reason' => $request->reason,
+                'previously' => $practice->title,
+                'user_id' => Auth::user()->id,
+                'practice_id' => $practice->id
+            ]);
 
-        if (!$practice->save()) $this->flashBag($request, 'Une erreur est survenue', 'danger');
+            $practice->title = $request->title;
+            if (!$practice->save()) $this->flashBag($request, 'Une erreur est survenue', 'danger');
 
-        $this->flashBag($request, 'Titre mis à jours !');
+            $this->flashBag($request, 'Titre mis à jours !');
+        }
 
         return redirect()->route('practice', $id);
     }
